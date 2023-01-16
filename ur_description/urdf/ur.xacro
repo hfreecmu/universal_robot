@@ -31,4 +31,12 @@
      safety_limits="$(arg safety_limits)"
      safety_pos_margin="$(arg safety_pos_margin)"
      safety_k_position="$(arg safety_k_position)"/>
+
+      <!-- Harry added this to fix setJointLimits bug -->
+      <link name="world"/>
+      <joint name="world_joint" type="fixed">
+            <parent link="world"/>
+            <child link="base_link"/>
+            <origin xyz="0.0 0.0 1.54" rpy="1.5707 0.0 1.5707"/>
+      </joint>
 </robot>
