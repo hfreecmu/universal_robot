@@ -59,7 +59,6 @@
   <xacro:include filename="$(find ur_description)/urdf/inc/ur_macro_bb.xacro"/>
   <!-- <xacro:include filename="$(find ur_description)/urdf/inc/ur_macro.xacro"/> -->
 
-
     <!-- Instantiate model for the REAL robot. -->
     <xacro:ur_robot
       prefix="${prefix}"
@@ -94,6 +93,63 @@
     </gazebo>
     <gazebo reference="${prefix}ee_link">
       <selfCollide>true</selfCollide>
+
+      <sensor type="multicamera" name="stereo_camera">
+        <update_rate>1.0</update_rate>
+      
+        <camera name="left">
+          <pose>0 0 0 0 0 0</pose>
+          <horizontal_fov>0.777</horizontal_fov>
+          <image>
+            <width>1440</width>
+            <height>1080</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.0</stddev>
+          </noise>
+        </camera>
+
+        <camera name="right">
+          <pose>0 -0.06 0 0 0 0</pose>
+          <horizontal_fov>0.777</horizontal_fov>
+          <image>
+            <width>1440</width>
+            <height>1080</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.0</stddev>
+          </noise>
+        </camera>
+
+        <plugin name="stereo_camera_controller" filename="libgazebo_ros_multicamera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>theia</cameraName>
+          <imageTopicName>image_raw_sim</imageTopicName>
+          <cameraInfoTopicName>camera_info_sim</cameraInfoTopicName>
+          <frameName>camera</frameName>
+          <hackBaseline>0.06</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
     </gazebo>
 
     <!--

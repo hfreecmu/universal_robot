@@ -5,11 +5,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /MotionPlanning1
-        - /MotionPlanning1/Planning Request1
-        - /PoseArray1
       Splitter Ratio: 0.5175438523292542
-    Tree Height: 334
+    Tree Height: 146
   - Class: rviz/Help
     Name: Help
   - Class: rviz/Views
@@ -125,11 +122,19 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
+          tool0_controller:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           upper_arm_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          world:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           wrist_1_link:
             Alpha: 1
             Show Axes: false
@@ -244,11 +249,19 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
+          tool0_controller:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           upper_arm_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          world:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           wrist_1_link:
             Alpha: 1
             Show Axes: false
@@ -275,10 +288,10 @@ Visualization Manager:
       Velocity_Scaling_Factor: 0.1
     - Class: rviz/Marker
       Enabled: true
-      Marker Topic: /tag_position
+      Marker Topic: /target_position
       Name: Marker
       Namespaces:
-        tag: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -294,9 +307,141 @@ Visualization Manager:
       Shaft Length: 0.23000000417232513
       Shaft Radius: 0.009999999776482582
       Shape: Arrow (3D)
-      Topic: /targte_poses
+      Topic: /camera_poses
       Unreliable: false
       Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /theia/left/image_rect_color
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: left_rect
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /theia/right/image_rect_color
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: right_rect
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /theia/left/image_raw_sim
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: RGB8
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Min Color: 0; 0; 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.0005000000237487257
+      Style: Flat Squares
+      Topic: /pointcloud
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /disparity_image
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: ""
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Min Color: 0; 0; 0
+      Name: PointCloud2
+      Position Transformer: ""
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic: /voxblox_node/tsdf_pointcloud
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: RGB8
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Min Color: 0; 0; 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.0005000000237487257
+      Style: Flat Squares
+      Topic: /voxblox_node/surface_pointcloud
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -313,25 +458,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 1.0445666313171387
+      Distance: 0.5736510753631592
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.6298865675926208
-        Y: 0.32704824209213257
-        Z: 5.684341886080801e-13
+        X: 0.7964492440223694
+        Y: 0.26090529561042786
+        Z: -2.0580731074915093e-7
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5697969198226929
+      Pitch: 0.2047993689775467
       Target Frame: base_link
       Value: XYOrbit (rviz)
-      Yaw: 1.4867641925811768
+      Yaw: 2.366852045059204
     Saved: ~
 Window Geometry:
   Displays:
@@ -340,14 +485,20 @@ Window Geometry:
   Help:
     collapsed: false
   Hide Left Dock: false
-  Hide Right Dock: false
+  Hide Right Dock: true
+  Image:
+    collapsed: false
   MotionPlanning:
     collapsed: false
   MotionPlanning - Trajectory Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000001f30000039efc0200000007fb000000100044006900730070006c006100790073010000003d0000018b000000c900fffffffb0000000800480065006c00700000000342000000bb0000006e00fffffffb0000000a0056006900650077007300000003b0000000b0000000a400fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670100000374000001890000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000001600000016fb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006701000001ce0000020d0000017d00ffffff000005620000039e00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000100000000000001f30000039efc020000000efb000000100044006900730070006c006100790073010000003d000000cf000000c900fffffffb0000000800480065006c00700000000342000000bb0000006e00fffffffb0000000a0056006900650077007300000003b0000000b0000000a400fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670100000374000001890000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000001600000016fb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e00670100000112000001930000017d00fffffffb00000012006c006500660074005f007200650063007401000002ab000000590000001600fffffffb0000001000630062005f0069006d00610067006500000002f8000000e30000000000000000fb0000000a0049006d006100670065010000030a000000d10000001600fffffffb0000000a0049006d00610067006500000002d10000010a0000001600fffffffb0000001400720069006700680074005f0072006500630074000000033c0000009f0000001600fffffffb0000000a0049006d00610067006501000002f6000000580000000000000000fb0000000a0049006d0061006700650100000354000000870000000000000000000005620000039e00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
   Width: 1883
   X: 37
   Y: 27
+  left_rect:
+    collapsed: false
+  right_rect:
+    collapsed: false
