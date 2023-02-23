@@ -8,6 +8,17 @@
 
   <xacro:macro name="ur_arm_transmission" params="prefix hw_interface">
 
+    <!-- I added sliding base -->
+    <transmission name="${prefix}sliding_base_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}sliding_base_joint">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}sliding_base_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
     <transmission name="${prefix}shoulder_pan_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}shoulder_pan_joint">

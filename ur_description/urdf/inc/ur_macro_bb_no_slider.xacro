@@ -78,34 +78,24 @@
     <!-- links: main serial chain -->
     <link name="${prefix}base_link"/>
     <link name="${prefix}base_link_inertia">
-      <inertial>
-        <mass value="1.0" />
-        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
-      </inertial>
       <visual>
-        <!-- <origin xyz="0 0 0" rpy="0 0 ${pi}"/> -->
-        <origin rpy="0 ${-1* pi / 2}  0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
         <geometry>
-          <!-- <mesh filename="${base_visual_mesh}"/> -->
-          <mesh filename="package://ros_urdf_tutorial/slide_mesh/corrected/linear_slide_reduced_origin_fixed.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="${base_visual_mesh}"/>
         </geometry>
-        <!-- <material name="${base_visual_material_name}"> -->
-          <!-- <color rgba="${base_visual_material_color}"/> -->
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0"/>
+        <material name="${base_visual_material_name}">
+          <color rgba="${base_visual_material_color}"/>
         </material>
       </visual>
       <collision>
-        <!-- <origin xyz="0 0 0" rpy="0 0 ${pi}"/> -->
-        <origin rpy="0 ${-1* pi / 2}  0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
         <geometry>
-          <!-- <mesh filename="${base_collision_mesh}"/> -->
-          <mesh filename="package://ros_urdf_tutorial/slide_mesh/corrected/linear_slide_reduced_origin_fixed.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="${base_collision_mesh}"/>
         </geometry>
       </collision>
-      <!-- <xacro:cylinder_inertial radius="${base_inertia_radius}" length="${base_inertia_length}" mass="${base_mass}">
+      <xacro:cylinder_inertial radius="${base_inertia_radius}" length="${base_inertia_length}" mass="${base_mass}">
         <origin xyz="0 0 0" rpy="0 0 0" />
-      </xacro:cylinder_inertial> -->
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}shoulder_link">
       <visual>
@@ -238,25 +228,12 @@
            Use the joint between 'base_link' and 'base_link_inertia' (a dummy
            link/frame) to introduce the necessary rotation over Z (of pi rad).
       -->
-      <!-- <origin xyz="0 0 0" rpy="0 0 ${pi}" /> -->
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 ${pi}" />
     </joint>
-
-    <!-- I added this here first so that it is first in list -->
-    <joint name="${prefix}sliding_base_joint" type="prismatic">
-		  <parent link="${prefix}base_link_inertia"/>
-		  <child link="${prefix}camera_link_"/>
-		  <limit effort="1" lower="-0.675" upper="0.675" velocity="0.25" acceleration="2.5"/>
-		  <axis xyz = "0 1 0"/>
-		  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-	  </joint>
-
     <joint name="${prefix}shoulder_pan_joint" type="revolute">
-      <!-- <parent link="${prefix}base_link_inertia" /> -->
-      <parent link="${prefix}ur_base_link" />
+      <parent link="${prefix}base_link_inertia" />
       <child link="${prefix}shoulder_link" />
-      <!-- <origin xyz="${shoulder_x} ${shoulder_y} ${shoulder_z}" rpy="${shoulder_roll} ${shoulder_pitch} ${shoulder_yaw}" /> -->
-      <origin xyz="0.0 0.0 0.089159" rpy="0.0 0.0 ${pi}" />
+      <origin xyz="${shoulder_x} ${shoulder_y} ${shoulder_z}" rpy="${shoulder_roll} ${shoulder_pitch} ${shoulder_yaw}" />
       <axis xyz="0 0 1" />
       <limit lower="${shoulder_pan_lower_limit}" upper="${shoulder_pan_upper_limit}"
         effort="${shoulder_pan_effort_limit}" velocity="${shoulder_pan_velocity_limit}"/>
@@ -440,55 +417,5 @@
     <link name="inhand_cam_link"></link>
 
     <!-- ======================== END-EFFECTOR END==========================-->
-
-    <!-- ======================== SLIDING-BASE START==========================-->
-    <link name="camera_link_">
-		  <visual>
-			  <geometry>
-				  <mesh filename="package://ros_urdf_tutorial/slide_mesh/corrected/camera_system_stl_reduced_origin_fixed.stl" scale="0.001 0.001 0.001"/>
-			  </geometry>
-			  <origin rpy="0 -1.5708 0" xyz="0 0 0.053012 "/>
-				<material name="white">
-			    <color rgba="1 1 1 1"/>
-			  </material>
-		  </visual>
-		  <collision>
-			  <geometry>
-				  <mesh filename="package://ros_urdf_tutorial/slide_mesh/corrected/camera_system_stl_reduced_origin_fixed.stl" scale="0.001 0.001 0.001"/>
-			  </geometry>
-			  <origin rpy="0 -1.5708 0" xyz="0 0 0.053012 "/>
-		  </collision>
-		  <inertial>
-			  <mass value="1"/>
-			  <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
-		  </inertial>
-	  </link>
-
-    <joint name="camera_ur_base_joint" type="fixed">
-      <origin rpy="0 0 0" xyz="0 0 0.138352 "/>
-      <parent link="camera_link_"/>
-      <child link="ur_base_link"/>
-    </joint>
-
-    <link name="${prefix}ur_base_link" >
-      <visual>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur5/visual/base.dae" />
-        </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0"/>
-        </material>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur5/collision/base.stl" />
-        </geometry>
-      </collision>
-      <xacro:cylinder_inertial radius="0.06" length="0.05" mass="${base_mass}">
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-      </xacro:cylinder_inertial>
-    </link>
-
-    <!-- ======================== SLIDING-BASE START==========================-->
   </xacro:macro>
 </robot>
