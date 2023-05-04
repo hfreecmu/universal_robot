@@ -3,6 +3,7 @@ controller_list:
   action_ns: follow_joint_trajectory
   type: FollowJointTrajectory
   joints:
+    - sliding_base_joint
     - shoulder_pan_joint
     - shoulder_lift_joint
     - elbow_joint
