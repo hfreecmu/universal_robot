@@ -1,10 +1,13 @@
 #manipulator:
-#  kinematics_solver: ur_kinematics/UR5eKinematicsPlugin
+#  kinematics_solver: ur_kinematics/UR5KinematicsPlugin
 #  kinematics_solver_search_resolution: 0.005
 #  kinematics_solver_timeout: 0.005
 manipulator:
+  #http://docs.ros.org/en/kinetic/api/moveit_tutorials/html/doc/trac_ik/trac_ik_tutorial.html
   kinematics_solver: trac_ik_kinematics_plugin/TRAC_IKKinematicsPlugin
+  #solve_type: Speed?
   solve_type: Distance
-  kinematics_solver_search_resolution: 0.005
+  #kinematics_solver_search_resolution not applicable for trac_ik
+  #kinematics_solver_search_resolution: 0.005
   kinematics_solver_timeout: 0.005
   #kinematics_solver_timeout: 5
