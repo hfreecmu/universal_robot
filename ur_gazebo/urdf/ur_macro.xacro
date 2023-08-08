@@ -94,7 +94,7 @@
     <gazebo reference="${prefix}ee_link">
       <selfCollide>true</selfCollide>
 
-      <sensor type="multicamera" name="stereo_camera">
+      <!-- <sensor type="multicamera" name="stereo_camera">
         <update_rate>1.0</update_rate>
       
         <camera name="left">
@@ -148,6 +148,54 @@
           <distortionK3>0.0</distortionK3>
           <distortionT1>0.0</distortionT1>
           <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor> -->
+
+      <sensor name="depth_camera" type="depth">
+        <update_rate>1.0</update_rate>
+
+        <camera name="rgbd_camera">
+          <pose>0 0 0 0 0 0</pose>
+          <horizontal_fov>0.777</horizontal_fov>
+          <image>
+            <width>1440</width>
+            <height>1080</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.01</near>
+            <far>10</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.000</stddev>
+          </noise>
+        </camera>
+
+        <plugin name="depth_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+          <baseline>0.2</baseline>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>theia</cameraName>
+          <imageTopicName>/theia/left/image_raw_sim</imageTopicName>
+          <cameraInfoTopicName>/theia/left/camera_info_sim</cameraInfoTopicName>
+          <depthImageTopicName>/theia/depth/image_raw_sim</depthImageTopicName>
+          <depthImageCameraInfoTopicName>/theia/depth/camera_info_sim</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>/theia/depth/points_sim</pointCloudTopicName>
+          <frameName>camera</frameName>
+          <pointCloudCutoff>0.01</pointCloudCutoff>
+          <pointCloudCutoffMax>2.0</pointCloudCutoffMax>
+          <distortionK1>0</distortionK1>
+          <distortionK2>0</distortionK2>
+          <distortionK3>0</distortionK3>
+          <distortionT1>0</distortionT1>
+          <distortionT2>0</distortionT2>
+          <CxPrime>0</CxPrime>
+          <Cx>0</Cx>
+          <Cy>0</Cy>
+          <focalLength>0</focalLength>
+          <hackBaseline>0</hackBaseline>
         </plugin>
       </sensor>
     </gazebo>
