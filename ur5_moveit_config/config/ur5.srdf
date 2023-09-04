@@ -22,6 +22,15 @@
         <joint name="wrist_2_joint" value="-1.6692450682269495" />
         <joint name="wrist_3_joint" value="3.1415" />
     </group_state>
+    <group_state name="exp" group="manipulator">
+        <joint name="sliding_base_joint" value="0" />
+        <joint name="elbow_joint" value="-2.54818" />
+        <joint name="shoulder_lift_joint" value="0.0349066" />
+        <joint name="shoulder_pan_joint" value="0.0523599" />
+        <joint name="wrist_1_joint" value="-2.0944" />
+        <joint name="wrist_2_joint" value="-1.65806" />
+        <joint name="wrist_3_joint" value="3.10669" />
+    </group_state>
     <group_state name="up" group="manipulator">
         <joint name="sliding_base_joint" value="0" />
         <joint name="elbow_joint" value="0" />
